@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Repayment Calculator</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="logic.js"></script>
+</head>
+<body>
+    <div class="calculator">
+        <h2>Loan Repayment Calculator</h2>
+        <label for="loanAmount">Loan Amount ($):</label>
+        <input type="number" id="loanAmount" placeholder="Enter loan amount">
+
+        <label for="interestRate">Annual Interest Rate (%):</label>
+        <input type="number" id="interestRate" placeholder="Enter interest rate">
+
+        <label for="loanTerm">Loan Term (Years):</label>
+        <input type="number" id="loanTerm" placeholder="Enter loan term">
+
+        <button class="primary-btn" onclick="calculateLoan()">Calculate</button>
+        
+        <div class="summary">
+            <h3>Repayment Summary</h3>
+            <p id="monthlyPayment">Monthly Payment: <span>$0.00</span></p>
+            <p id="totalPayment">Total Payment: <span>$0.00</span></p>
+            <p id="totalInterest">Total Interest: <span>$0.00</span></p>
+        </div>
+        
+        <button class="secondary-btn" onclick="showBreakdown()">View Breakdown</button>
+    </div>
+</body>
+</html>
