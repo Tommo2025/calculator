@@ -2,20 +2,24 @@
             let loanAmount = parseFloat(document.getElementById('loanAmount').value);
             let interestRate = parseFloat(document.getElementById('interestRate').value) / 100 / 12;
             let loanTerm = parseInt(document.getElementById('loanTerm').value) * 12;
-            
+  			let ioTerm = ParseInt(document.getElementById('ioTerm').value) * 12;
+			let extraPayment = parseFloat(document.getElementById('extraPayment').value);			
+			let frequencyMonth = ParseInt(document.getElementById('frequencyMonth').value) * 12;
+			
             if (isNaN(loanAmount) || isNaN(interestRate) || isNaN(loanTerm) || loanAmount <= 0 || interestRate < 0 || loanTerm <= 0) {
                 alert("Please enter valid values.");
                 return;
             }
             
-            let monthlyPayment = (loanAmount * interestRate * Math.pow(1 + interestRate, loanTerm)) / 
+			let calcTerm = loanTerm-ioTerm
+            let monthlyPayment = (loanAmount * interestRate * Math.pow(1 + interestRate, ioTerm)) / 
                                  (Math.pow(1 + interestRate, loanTerm) - 1);
-            let totalPayment = monthlyPayment * loanTerm;
+            let totalPayment = monthlyPayment * (loanTerm-ioTerm);
             let totalInterest = totalPayment - loanAmount;
             
-            document.getElementById('monthlyPayment').innerHTML = `Monthly Payment: <span>${formatCurrency(monthlyPayment)}</span>`;
-            document.getElementById('totalPayment').innerHTML = `Total Payment: <span>${formatCurrency(totalPayment)}</span>`;
-            document.getElementById('totalInterest').innerHTML = `Total Interest: <span>${formatCurrency(totalInterest)}</span>`;
+            document.getElementById('monthlyPayment').innerHTML = "Monthly Payment: <span>${formatCurrency(monthlyPayment)}</span>";
+            document.getElementById('totalPayment').innerHTML = "Total Payment: <span>${formatCurrency(totalPayment)}</span>";
+            document.getElementById('totalInterest').innerHTML = "Total Interest: <span>${formatCurrency(totalInterest)}</span>";
         }
         
         function formatCurrency(amount) {
@@ -27,6 +31,9 @@
             let interestRate = parseFloat(document.getElementById('interestRate').value) / 100 / 12;
             let intCalcRate = parseFloat(document.getElementById('interestRate').value)
             let loanTerm = parseInt(document.getElementById('loanTerm').value) * 12;
+			let ioTerm = ParseInt(document.getElementById('ioTerm').value) * 12;
+			let extraPayment = parseFloat(document.getElementById('extraPayment').value);			
+			let frequencyMonth = ParseInt(document.getElementById('frequencyMonth').value) * 12;
             
             if (isNaN(loanAmount) || isNaN(interestRate) || isNaN(loanTerm) || loanAmount <= 0 || interestRate < 0 || loanTerm <= 0) {
                 alert("Please enter valid values.");
