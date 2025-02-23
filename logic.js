@@ -2,18 +2,18 @@
             let loanAmount = parseFloat(document.getElementById('loanAmount').value);
             let interestRate = parseFloat(document.getElementById('interestRate').value) / 100 / 12;
             let loanTerm = parseInt(document.getElementById('loanTerm').value) * 12;
-  			let ioTerm = parseInt(document.getElementById('ioTerm').value) * 12;
-			let extraPayment = parseFloat(document.getElementById('extraPayment').value);			
-			let frequencyMonth = parseInt(document.getElementById('frequencyMonth').value) * 12;
+  			    let ioTerm = parseInt(document.getElementById('ioTerm').value) * 12;
+			     // let extraPayment = parseFloat(document.getElementById('extraPayment').value);			
+			      //let frequencyMonth = parseInt(document.getElementById('frequencyMonth').value) * 12;
 			
             if (isNaN(loanAmount) || isNaN(interestRate) || isNaN(loanTerm) || loanAmount <= 0 || interestRate < 0 || loanTerm <= 0) {
                 alert("Please enter valid values.");
                 return;
             }
             
-			let calcTerm = loanTerm-ioTerm
-            let monthlyPayment = (loanAmount * interestRate * Math.pow(1 + interestRate, ioTerm)) / 
-                                 (Math.pow(1 + interestRate, loanTerm) - 1);
+			      let calcTerm = loanTerm-ioTerm
+            let monthlyPayment = (loanAmount * interestRate * Math.pow(1 + interestRate, calcTerm)) / 
+                                 (Math.pow(1 + interestRate, calcTerm) - 1);
             let totalPayment = monthlyPayment * (loanTerm-ioTerm);
             let totalInterest = totalPayment - loanAmount;
             
@@ -31,17 +31,23 @@
             let interestRate = parseFloat(document.getElementById('interestRate').value) / 100 / 12;
             let intCalcRate = parseFloat(document.getElementById('interestRate').value)
             let loanTerm = parseInt(document.getElementById('loanTerm').value) * 12;
-			let ioTerm = parseInt(document.getElementById('ioTerm').value) * 12;
-			let extraPayment = parseFloat(document.getElementById('extraPayment').value);			
-			let frequencyMonth = ParseInt(document.getElementById('frequencyMonth').value) * 12;
+			      let ioTerm = parseInt(document.getElementById('ioTerm').value) * 12;
+			      let extraPayment = parseFloat(document.getElementById('extraPayment').value);			
+			      let frequencyMonth = parseInt(document.getElementById('frequencyMonth').value) * 12;
+            let principalPayment = 0;
+            let displayPayment =0;
+            let displayTerm=0;
+            let displayNote="";
+            let month=0;
             
             if (isNaN(loanAmount) || isNaN(interestRate) || isNaN(loanTerm) || loanAmount <= 0 || interestRate < 0 || loanTerm <= 0 || ioTerm < 0 || ioTerm > loanTerm) {
                 alert("Please enter valid values.");
                 return;
             }
             
-            let monthlyPayment = (loanAmount * interestRate * Math.pow(1 + interestRate, loanTerm)) / 
-                                 (Math.pow(1 + interestRate, loanTerm) - 1);
+            displayTerm = loanTerm-ioTerm;
+            let monthlyPayment = (loanAmount * interestRate * Math.pow(1 + interestRate, displayTerm)) / 
+                                 (Math.pow(1 + interestRate, displayTerm) - 1);
             let remainingBalance = loanAmount;
             
             let breakdownContent = `
@@ -66,31 +72,48 @@
                                 <th>Principal</th>
                                 <th>Interest</th>
                                 <th>Balance</th>
+                                <th>Note</th>
                             </tr>
                         </thead>
                         <tbody>
             `;
             
-            for (let month = 1; month <= loanTerm; month++) {
+            for (month = 1; month <= loanTerm; month++) {
                 let interestPayment = (remainingBalance * intCalcRate * 30.41666666666667)/36500;
-				if (ioTerm >= month)
-					{
-						let principalPayment = 0;
-					}
-					else
-					{
-                		let principalPayment = monthlyPayment - interestPayment;
-					}
+				if (ioTerm >= month){
 					
+						principalPayment = 0;
+            displayPayment = interestPayment;
+        }
+					else
+				{	
+            principalPayment = monthlyPayment - interestPayment;
+            displayPayment = monthlyPayment;
+        }	
+              
+        if (month == 1 && ioTerm > 0)
+					{
+            displayNote = "IO Term Begins";
+            
+          }
+         else if (ioTerm>0 && ioTerm==month)
+              {
+              displayNote = "IO Term Ends";
+              }
+          else
+            {
+              displayNote = "";
+            }
                 remainingBalance -= principalPayment;
                 
                 breakdownContent += `
                     <tr>
                         <td>${month}</td>
-                        <td>${formatCurrency(monthlyPayment)}</td>
+                        <td>${formatCurrency(displayPayment)}</td>
                         <td>${formatCurrency(principalPayment)}</td>
                         <td>${formatCurrency(interestPayment)}</td>
                         <td>${formatCurrency(Math.max(remainingBalance, 0))}</td>
+                        <td>${displayNote}</td>
                     </tr>
                 `;
             }
