@@ -11,16 +11,16 @@
                 return;
             }
             
-			      let calcTerm = loanTerm-ioTerm
+			let calcTerm = loanTerm-ioTerm
             let monthlyPayment = (loanAmount * interestRate * Math.pow(1 + interestRate, calcTerm)) / 
                                  (Math.pow(1 + interestRate, calcTerm) - 1);
             let totalPayment = monthlyPayment * (loanTerm-ioTerm);
             let totalInterest = totalPayment - loanAmount;
             
-            document.getElementById('monthlyPayment').innerHTML = "Monthly Payment: <span>${formatCurrency(monthlyPayment)}</span>";
-            document.getElementById('totalPayment').innerHTML = "Total Payment: <span>${formatCurrency(totalPayment)}</span>";
-            document.getElementById('totalInterest').innerHTML = "Total Interest: <span>${formatCurrency(totalInterest)}</span>";
-        }
+            document.getElementById('monthlyPayment').innerHTML = `Monthly Payment: <span>${formatCurrency(monthlyPayment)}</span>`;
+            document.getElementById('totalPayment').innerHTML = `Total Payment: <span>${formatCurrency(totalPayment)}</span>`;
+            document.getElementById('totalInterest').innerHTML = `Total Interest: <span>${formatCurrency(totalInterest)}</span>`;
+       }
         
         function formatCurrency(amount) {
             return amount.toLocaleString('en-AU', { style: 'currency', currency: 'AUD' });
@@ -31,9 +31,7 @@
             let interestRate = parseFloat(document.getElementById('interestRate').value) / 100 / 12;
             let intCalcRate = parseFloat(document.getElementById('interestRate').value)
             let loanTerm = parseInt(document.getElementById('loanTerm').value) * 12;
-			      let ioTerm = parseInt(document.getElementById('ioTerm').value) * 12;
-			      let extraPayment = parseFloat(document.getElementById('extraPayment').value);			
-			      let frequencyMonth = parseInt(document.getElementById('frequencyMonth').value) * 12;
+			let ioTerm = parseInt(document.getElementById('ioTerm').value) * 12;
             let principalPayment = 0;
             let displayPayment =0;
             let displayTerm=0;
