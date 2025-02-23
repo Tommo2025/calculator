@@ -73,7 +73,15 @@
             
             for (let month = 1; month <= loanTerm; month++) {
                 let interestPayment = (remainingBalance * intCalcRate * 30.41666666666667)/36500;
-                let principalPayment = monthlyPayment - interestPayment;
+				if (ioTerm >= month)
+					{
+						let principalPayment = 0;
+					}
+					else
+					{
+                		let principalPayment = monthlyPayment - interestPayment;
+					}
+					
                 remainingBalance -= principalPayment;
                 
                 breakdownContent += `
