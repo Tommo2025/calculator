@@ -2,9 +2,9 @@
             let loanAmount = parseFloat(document.getElementById('loanAmount').value);
             let interestRate = parseFloat(document.getElementById('interestRate').value) / 100 / 12;
             let loanTerm = parseInt(document.getElementById('loanTerm').value) * 12;
-  			let ioTerm = ParseInt(document.getElementById('ioTerm').value) * 12;
+  			let ioTerm = parseInt(document.getElementById('ioTerm').value) * 12;
 			let extraPayment = parseFloat(document.getElementById('extraPayment').value);			
-			let frequencyMonth = ParseInt(document.getElementById('frequencyMonth').value) * 12;
+			let frequencyMonth = parseInt(document.getElementById('frequencyMonth').value) * 12;
 			
             if (isNaN(loanAmount) || isNaN(interestRate) || isNaN(loanTerm) || loanAmount <= 0 || interestRate < 0 || loanTerm <= 0) {
                 alert("Please enter valid values.");
@@ -31,7 +31,7 @@
             let interestRate = parseFloat(document.getElementById('interestRate').value) / 100 / 12;
             let intCalcRate = parseFloat(document.getElementById('interestRate').value)
             let loanTerm = parseInt(document.getElementById('loanTerm').value) * 12;
-			let ioTerm = ParseInt(document.getElementById('ioTerm').value) * 12;
+			let ioTerm = parseInt(document.getElementById('ioTerm').value) * 12;
 			let extraPayment = parseFloat(document.getElementById('extraPayment').value);			
 			let frequencyMonth = ParseInt(document.getElementById('frequencyMonth').value) * 12;
             
