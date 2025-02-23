@@ -35,7 +35,7 @@
 			let extraPayment = parseFloat(document.getElementById('extraPayment').value);			
 			let frequencyMonth = ParseInt(document.getElementById('frequencyMonth').value) * 12;
             
-            if (isNaN(loanAmount) || isNaN(interestRate) || isNaN(loanTerm) || loanAmount <= 0 || interestRate < 0 || loanTerm <= 0) {
+            if (isNaN(loanAmount) || isNaN(interestRate) || isNaN(loanTerm) || loanAmount <= 0 || interestRate < 0 || loanTerm <= 0 || ioTerm < 0 || ioTerm > loanTerm) {
                 alert("Please enter valid values.");
                 return;
             }
